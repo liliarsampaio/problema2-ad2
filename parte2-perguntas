@@ -1,0 +1,19 @@
+1. A indústria musical, no que se refere ao lançamento de novas músicas, apresenta crescimento ao longo dos anos?
+  - A quem pode interessar: investidores na área de produção de álbuns;
+  - Variáveis de possível utilização: ano em que a música foi lançada, quantidade de músicas por ano;
+
+2. Quais os estilos musicais mais em gosto por época?
+  - A quem pode interessar: público em geral, produtores buscando entender o que está em gosto atualmente no mercado; 
+  - Variáveis de possível utilização: id do artista, id da tag, tag, quantidade de músicas por tag; 
+
+3. Artistas tendem a possuir um estilo musical definido ao longo do tempo?
+  - A quem pode interessar: produtores musicais, artistas;
+  - Variáveis de possível utilização: ano em que a música foi lançada, id do artista, tag;
+
+4. Nos últimos anos, que artistas e estilos musicais tem maior recorrência?
+  - A quem pode interessar: público em geral, artistas, gravadoras;
+  - Variáveis de possível utilização: id do artista, tag, term;
+
+5. O mercado da música está aberto para novos artistas?
+  - A quem pode interessar: artistas buscando iniciar carreira musical;
+  - Variáveis de possível utilização: ano de lançamento da música, id do artista;
