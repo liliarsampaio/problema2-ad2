@@ -1,0 +1,47 @@
+---
+title: "AD2 - Problema 2"
+author: "Lilia Sampaio"
+date: "November 4, 2014"
+output: html_document
+---
+
+**- Ao longo dos anos, houve crescimento no lançamento de músicas?**
+
+Para responder a essa pergunta, optei pelo uso de um gráfico de linhas simples, onde o eixo x corresponde aos anos ao longo do tempo, e o eixo y à quantidade de músicas lançadas. Os pontos representam os anos incluídos na base de dados (base considerada foi o txt de músicas por ano presente no documento do problema). Podemos ver o resultado no gráfico a seguir:
+
+```{r, echo=FALSE, fig.align='center', message=FALSE}
+require(ggplot2)
+require(dplyr)
+
+musicas.ano <- read.csv("subset_tracks_per_year.csv")
+anos <- group_by(musicas.ano, V1)
+anos.soma <- summarise(anos, count = n())
+
+ggplot(anos.soma, aes(x = V1, y = count)) + geom_line(colour="blue") + geom_point(colour="blue") + xlab("Ano") + ylab("Quantidade de musicas") + ggtitle("Quantidade de musicas por ano")
+```
+
+Analisando a figura acima, podemos dizer que ao longo do tempo o comportamento do lançamento de músicas foi relativamente constante nos primeiros anos, com um pequeno crescimento no período de 1960 à 1980, uma queda após esse período próximo ao ano 2000 e depois picos isolados após esse mesmo ano. 
+
+De modo geral, concluo que houve crescimento mais acelerado do ano 2000 pra cá. Isso significa, por exemplo, que o interesse das pessoas pela indústria musical, artistas e álbuns cresceu ao longo do tempo, e por isso, produtos relacionados a esse meio foram sendo lançados em maior quantidade.
+
+**- Qual a variação de estilos musicais ao longo do tempo?**
+
+Nessa pergunta, fiz uso de um gráfico de área, onde o eixo x correspondia aos anos ao longo do tempo, o eixo y à quantidade de músicas por tag e as cores representando as tags escolhidas para esse estudo, baseeadas na recorrência das mesmas na base de dados. Podemos ver o resultado no gráfico a seguir:
+
+```{r, echo=FALSE, fig.align='center', message=FALSE}
+require(ggplot2)
+require(dplyr)
+
+artistas.anos <- read.csv("artist_year_hotness.csv", sep="\t", header = TRUE)
+artistas.termos <- read.csv("artist_term.csv", sep="\t", header = TRUE)
+
+artistas.tags <- merge(artistas.anos, artistas.termos, by = "artist_id")
+at.group <- group_by(artistas.tags, term, year)
+atgroup.soma <- summarise(at.group, count=n())
+
+ggplot(atgroup.soma, aes(x=year, y=count, fill=term)) + geom_area() + xlab("Ano") + ylab("Quantidade de musicas") + ggtitle("Quantidade de musicas por genero ao longo do tempo")
+```
+
+Analisando a figura acima, podemos ver que o estilo musical que lançou mais músicas ao longo do tempo foi o *rock*. Também podemos dizer que todos os estilos apresentaram, no geral, crescimento do início das observações até o final, após o ano 2000. Entre 1940 e 1960 podemos dizer que os estilos estavam todos num mesmo patamar lançando uma mesma quantidade de músicas. A partir dai já podemos ver uma tendência dos estilos *rock* e *pop* se firmando como mais lançadas.
+
+Assim, isso significa, por exemplo, que nos últimos anos o interesse musical das pessoas tem sido maior pelos estilos *rock* e *pop*, já que mais músicas vem sendo lançadas nesse período. Também pode siginificar um aumento no numero de artistas representantes desses estilos. *Rock alternativo*, por sua vez, que se encontra atualmente como o estilo com menos músicas lançadas, pode não ter investidores suficientes para os artistas que fazem esse tipo de música.
